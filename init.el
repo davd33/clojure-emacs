@@ -210,3 +210,6 @@ There are two things you can do about this warning:
 ;; https://www.reddit.com/r/Clojure/comments/9owlxx/emacs_sesman_package_problem/
 ;; https://github.com/clojure-emacs/cider/issues/2491
 (defun sesman-linked-sessions (x y))
+
+;; tab size
+(setq default-tab-width 2)
