@@ -6,13 +6,6 @@
 (require 'package)
 (add-to-list 'package-archives
              '("tromey" . "http://tromey.com/elpa/") t)
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
-(add-to-list 'package-archives
-             '("melpa-stable" . "http://stable.melpa.org/packages/") t)
-
-(add-to-list 'package-pinned-packages '(cider . "melpa-stable") t)
-(add-to-list 'package-pinned-packages '(magit . "melpa-stable") t)
 
 ;; MELPA packages
 (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
@@ -31,6 +24,10 @@ There are two things you can do about this warning:
   (when (< emacs-major-version 24)
     ;; For important compatibility libraries like cl-lib
     (add-to-list 'package-archives (cons "gnu" (concat proto "://elpa.gnu.org/packages/")))))
+
+;; cider
+(add-to-list 'package-pinned-packages '(cider . "melpa") t)
+(add-to-list 'package-pinned-packages '(magit . "melpa") t)
 
 ;; Load and activate emacs packages. Do this first so that the
 ;; packages are loaded before you start trying to modify them.
@@ -69,6 +66,10 @@ There are two things you can do about this warning:
     ;; integration with a Clojure REPL
     ;; https://github.com/clojure-emacs/cider
     cider
+
+    ;; dracula theme
+    ;;
+    dracula-theme
 
     ;; allow ido usage in as many contexts as possible. see
     ;; customizations/navigation.el line 23 for a description
@@ -167,14 +168,19 @@ There are two things you can do about this warning:
  '(custom-enabled-themes (quote (dracula)))
  '(custom-safe-themes
    (quote
-    ("b46ee2c193e350d07529fcd50948ca54ad3b38446dcbd9b28d0378792db5c088" default)))
+    ("274fa62b00d732d093fc3f120aca1b31a6bb484492f31081c1814a858e25c72e" "b46ee2c193e350d07529fcd50948ca54ad3b38446dcbd9b28d0378792db5c088" default)))
  '(fci-rule-color "#2a2a2a")
  '(package-selected-packages
    (quote
-    (cider-decompile dracula-theme magit tagedit rainbow-delimiters projectile smex ido-completing-read+ cider clojure-mode-extra-font-locking clojure-mode paredit exec-path-from-shell))))
+    (dracula-theme magit tagedit rainbow-delimiters projectile smex ido-completing-read+ cider clojure-mode-extra-font-locking clojure-mode paredit exec-path-from-shell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;; workaround
+;; https://www.reddit.com/r/Clojure/comments/9owlxx/emacs_sesman_package_problem/
+;; https://github.com/clojure-emacs/cider/issues/2491
+(defun sesman-linked-sessions (x y))
